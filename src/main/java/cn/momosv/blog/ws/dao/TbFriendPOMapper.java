@@ -1,7 +1,7 @@
-package cn.momosv.blog.ws.dao1;
+package cn.momosv.blog.ws.dao;
 
 
-import cn.momosv.blog.common.dao.BasicMapper;
+import cn.momosv.blog.base.mybatis.dao.BasicMapper;
 import cn.momosv.blog.ws.model.TbFriendPO;
 
 public interface TbFriendPOMapper extends BasicMapper {

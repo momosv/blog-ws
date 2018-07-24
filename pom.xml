@@ -20,7 +20,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>cn.momosv</groupId>
-			<artifactId>blog-common</artifactId>
+			<artifactId>blog-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

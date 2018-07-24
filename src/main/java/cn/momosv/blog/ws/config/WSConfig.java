@@ -4,6 +4,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("cn.momosv.blog.ws.dao1")
+@MapperScan("cn.momosv.blog.ws.dao")
 public class WSConfig {
 }
