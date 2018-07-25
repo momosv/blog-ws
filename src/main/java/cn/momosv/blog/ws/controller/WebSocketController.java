@@ -1,6 +1,8 @@
 package cn.momosv.blog.ws.controller;
 
 
+import cn.momosv.blog.login.model.UserInfoPO;
+import cn.momosv.blog.ws.config.WebSocketStompConfig;
 import cn.momosv.blog.ws.entity.ServerMessage;
 import cn.momosv.blog.ws.entity.User;
 import com.alibaba.fastjson.JSON;
@@ -10,11 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.user.SimpSession;
+import org.springframework.messaging.simp.user.SimpSubscription;
 import org.springframework.messaging.simp.user.SimpUser;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.config.WebSocketMessageBrokerStats;
+import org.springframework.web.socket.messaging.DefaultSimpUserRegistry;
+
+import javax.websocket.Session;
 
 
 /**
@@ -35,6 +44,10 @@ public class WebSocketController {
 
     @Autowired
     private SimpUserRegistry userRegistry;
+    @Autowired
+    WebSocketMessageBrokerStats webSocketMessageBrokerStats;
+
+    WebSocketSession webSocketSession;
 
     @RequestMapping(value = "/toAll")
     public void toAll(@RequestParam(defaultValue = "这是系统默认消息") String msg) {
@@ -56,8 +69,14 @@ public class WebSocketController {
         for (SimpUser user1 : userRegistry.getUsers()) {
             logger.info("用户" + i++ + "---" + user1);
         }
+         i = 0;
+        for(SimpSession s: userRegistry.getUser("momo").getSessions()){
+            logger.info("用户session"  + "---" + s) ;
+        }
+
         //发送消息给指定用户
         messagingTemplate.convertAndSendToUser(toUser, "/queue/toChat", new ServerMessage(fromUser.getName(),toUser,msg));
+
     }
 
     @MessageMapping("/onLine")

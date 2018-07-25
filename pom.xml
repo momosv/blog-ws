@@ -23,7 +23,13 @@
 			<artifactId>blog-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>cn.momosv</groupId>
+            <artifactId>blog-login</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 	<build>
 		<!-- 为jar包取名 -->
 		<finalName>blog-ws</finalName>
